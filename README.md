@@ -71,8 +71,7 @@ Each record includes:
 
 - Node.js  
 - Express.js  
-- MongoDB (Mongoose)  
-- Swagger (API Documentation)  
+- MongoDB (Mongoose) 
 - Postman (Testing)  
 
 ---
