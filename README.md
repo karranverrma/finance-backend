@@ -18,7 +18,7 @@ The goal is to showcase backend design, logical thinking, and real-world API beh
 - Node.js  
 - Express.js  
 - MongoDB (Mongoose)  
-- Swagger (API Documentation)  
+- Postman Docs/Swagger (API Documentation)  
 - Postman (Testing)  
 
 ---
@@ -159,7 +159,17 @@ This simplifies testing while still enforcing RBAC.
 
 ---
 
-## 📡 API Endpoints
+## 📄 API Documentation
+
+API documentation is available via Postman:
+
+[https://documenter.getpostman.com/view/your-link](https://documenter.getpostman.com/view/53721777/2sBXionVdK)
+
+This includes:
+- All endpoints  
+- Example requests  
+- Sample responses  
+- Header requirements (role-based access)  
 
 ### Users
 - `POST /users` → Create user  
@@ -167,6 +177,31 @@ This simplifies testing while still enforcing RBAC.
 - `PATCH /users/:id` → Update role/status  
 
 ---
+
+Authentication is simulated via middleware.
+
+All API requests require a role header:
+
+role: admin
+
+This is also documented in the Postman API documentation.
+
+## 🧪 Example API Calls
+
+### Get Records with Filtering
+
+GET /records?type=income
+
+### Create Record
+
+POST /records
+
+{
+  "amount": 5000,
+  "type": "income",
+  "category": "salary",
+  "date": "2026-04-03"
+}
 
 ### Records
 - `POST /records` → Create record  
