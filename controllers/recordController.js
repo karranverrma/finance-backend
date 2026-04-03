@@ -4,7 +4,7 @@ async function createRecord(req, res) {
   try {
     const { amount, type, category, date, notes } = req.body;
 
-    // ✅ Validation (correct placement)
+    // ✅ Validation
     if (!amount || !type || !category || !date) {
       return res.status(400).json({ message: "All fields required" });
     }
@@ -27,7 +27,24 @@ async function createRecord(req, res) {
 
 async function getRecords(req, res) {
   try {
-    const records = await Record.find({ createdBy: req.user._id })
+    const { type, category, startDate, endDate } = req.query;
+
+    let filter = { createdBy: req.user._id };
+
+    // ✅ Filtering by type
+    if (type) filter.type = type;
+
+    // ✅ Filtering by category
+    if (category) filter.category = category;
+
+    // ✅ Filtering by date range
+    if (startDate || endDate) {
+      filter.date = {};
+      if (startDate) filter.date.$gte = new Date(startDate);
+      if (endDate) filter.date.$lte = new Date(endDate);
+    }
+
+    const records = await Record.find(filter)
       .sort({ createdAt: -1 });
 
     return res.json({ records });
